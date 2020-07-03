@@ -10,6 +10,14 @@ import sys, traceback
 import termcolor
 from sys import platform
 
+def intro():
+    subprocess.call(["clear"])
+    print('[+] Toolbelt v1.0 by @L0WK3Y_IAANSEC [+]')
+    custom_fig = Figlet(font='isometric1')
+    print(custom_fig.renderText("IAAN"))
+    time.sleep(2)
+intro()
+
 def osCheck():
             if platform == "linux" or platform == "linux2":
                 
@@ -20,19 +28,20 @@ def osCheck():
                         numberList = '0', '2', '4', '6', '8'
                         randomNums = random.choice(numberList)
                         subprocess.call(["clear"])
-                        print('[+] Toolbelt v1.0 by @L0WK3Y_IAANSEC [+]')
-                        custom_fig = Figlet(font='isometric1')
-                        print(custom_fig.renderText("IAAN"))
-                        time.sleep(2)
-                        subprocess.call(["clear"])
                         # modeSelection = raw_input ("1. Auto MAC Generator \n2. Manual MAC Entry\n3. IP Address Generator \nMode: ")
-                        modeSelection = raw_input ("1. MAC Changer\n2. IP Address Generator \n3. Network Interface Modes \n4. System Updates & Upgrades \nMode: ")
+                        modeSelection = raw_input ("1. MAC Changer\n2. IP Address Generator \n3. Network Interface Modes \n4. System Updates & Upgrades \n\n\n\n0. Exit\nMode: ")
 
 
                         if modeSelection == '1':
                             subprocess.call('clear')
                             def MACchanger():
-                                macChanger = raw_input ("1. Auto MAC Generator \n2. Manual MAC Entry\nMode: ")
+                                macChanger = raw_input ("1. Auto MAC Generator \n2. Manual MAC Entry\n\n\n\n0. Back\nMode: ")
+
+                                if macChanger == '0':
+                                    def returnToMenu():
+                                        subprocess.call(['clear'])
+                                        osCheck()
+                                    returnToMenu()
                                 if macChanger == '1':
                                     subprocess.call(['clear'])
                                     def autoMacGenerator():
@@ -89,6 +98,12 @@ def osCheck():
                                         print('[+] Bringing ' + interface + ' back online')
                                         time.sleep(.5)
                                         print('[+] Operation Complete')
+                                        def continueToMenu():
+                                            subprocess.call(['clear'])
+                                            anyKey = raw_input("Press any key to continue...")
+                                            if anyKey == anyKey:
+                                                osCheck()
+                                        continueToMenu()
                                     autoMacGenerator()
                             
 
@@ -127,6 +142,12 @@ def osCheck():
                                         print('[+] Bringing ' + interface + ' back online')
                                         time.sleep(.5)
                                         print('[+] Operation Complete')
+                                        def continueToMenu():
+                                            subprocess.call(['clear'])
+                                            anyKey = raw_input("Press any key to continue...")
+                                            if anyKey == anyKey:
+                                                osCheck()
+                                        continueToMenu()
                                     manualEntry()
                             MACchanger()
 
@@ -146,7 +167,7 @@ def osCheck():
                                 time.sleep(.5)
                                 generationAnimation()
                                 print('\n' + "[+] IP generation complete.")
-                                time.sleep(.5)
+                                time.sleep(.2)
                                 subprocess.call(['clear'])
                                 def ipList():
                                     ipArray = [1,'.', 2,'.',3,'.',4]
@@ -158,13 +179,24 @@ def osCheck():
                                     print('\n' + ipString)
                                 for i in range(10):
                                     ipList()
+                                    time.sleep(.5)
+                                def continueToMenu():                                    
+                                    anyKey = raw_input("\n\nPress any key to continue...")
+                                    if anyKey == anyKey:
+                                        osCheck()
+                                continueToMenu()
                             
                             ipGenerator()
 
                         #add a monitor mode function
                         if modeSelection == '3':
                             subprocess.call(['clear'])
-                            interfaceModeSelection = raw_input("1. Monitor Mode\n2. Managed Mode\nMode: ")
+                            interfaceModeSelection = raw_input("1. Monitor Mode\n2. Managed Mode\n\n\n\n0. Back\nMode: ")
+                            if interfaceModeSelection == '0':
+                                def returnToMenu():
+                                        subprocess.call(['clear'])
+                                        osCheck()
+                                returnToMenu()
                             if interfaceModeSelection == '1':
                                 subprocess.call(['clear'])
                                 def monitorMode():
@@ -175,7 +207,7 @@ def osCheck():
                                         subprocess.call(['clear'])
                                         subprocess.call(["ifconfig"])
                                         time.sleep(1)
-                                        interface = raw_input("Enter name of wireless interface : ")
+                                        interface = raw_input("Enter name of wireless interface: ")
 
                                         zero = '0'
                                         a = random.choice(randomString)
@@ -227,6 +259,13 @@ def osCheck():
                                         print('[+] Bringing ' + interface + ' back online')
                                         time.sleep(.5)
                                         print('[+] Operation Complete')
+                                        def continueToMenu():
+                                            subprocess.call(['clear'])
+                                            anyKey = raw_input("Press any key to continue...")
+                                            if anyKey == anyKey:
+                                                osCheck()
+                                        continueToMenu()
+
                                     autoMacGenerator()
                                 monitorMode()
                             if interfaceModeSelection == '2':
@@ -247,13 +286,40 @@ def osCheck():
                                     print('[+] Managed mode now active on ' + interface)
                                     time.sleep(.5)
                                     print('[+] Operation Complete')
+                                    time.sleep(1)
+                                    def continueToMenu():
+                                        subprocess.call(['clear'])
+                                        anyKey = raw_input("Press any key to continue...")
+                                        if anyKey == anyKey:
+                                            osCheck()
+                                    continueToMenu()
+                        
                                 managedMode()
                         if modeSelection == '4':
                             subprocess.call(['clear'], shell=True)
                             print("[+] Mode 4. |System Updates & Upgrades| selected.")
-                            subprocess.call("sudo apt-get update && sudo apt-get upgrade", shell=True)
+                            subprocess.call("sudo apt-get update && sudo dpkg --configure -a && sudo apt-get upgrade", shell=True)
+                            print("[+] Operation Complete")
+                            time.sleep(.5)
+                            def continueToMenu():
+                                subprocess.call(['clear'])
+                                anyKey = raw_input("Press any key to continue...")
+                                if anyKey == anyKey:
+                                    osCheck()
+                            continueToMenu()
+                        if modeSelection == '0':
+                            subprocess.call(['clear'])
+                            termcolor.cprint(text="\nExiting...\n", color="red")
+                            time.sleep(1)
+                            subprocess.call(['clear'])
+                            exit
+                            
                     except KeyboardInterrupt:
-                        termcolor.cprint(text="\nShutdown requested...exiting\n", color="red") 
+                        subprocess.call(['clear'])
+                        termcolor.cprint(text="\nShutdown requested, exiting...\n", color="red") 
+                        time.sleep(2)
+                        subprocess.call(['clear'])
+
                     except Exception:
                         traceback.print_exc(file=sys.stdout)
                     sys.exit(0)
