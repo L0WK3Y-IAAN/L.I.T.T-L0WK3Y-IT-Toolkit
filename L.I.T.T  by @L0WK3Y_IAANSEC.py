@@ -17,18 +17,19 @@ import sys, traceback
 import termcolor
 from sys import platform
 
-def intro():
-    subprocess.call(["clear"])
-    print('[+] L.I.T.T v1.0 by @L0WK3Y_IAANSEC [+]')
-    custom_fig = pyfiglet.Figlet(font='isometric1')
-    print(custom_fig.renderText("LITT"))
-    time.sleep(2)
-intro()
 
 def osCheck():
             if platform == "linux" or platform == "linux2":
                 
                 def linux():#Linux Commands
+                    def intro():
+                        subprocess.call(["clear"])
+                        print('[+] L.I.T.T v1.0 by @L0WK3Y_IAANSEC [+]')
+                        custom_fig = pyfiglet.Figlet(font='isometric1')
+                        print(custom_fig.renderText("LITT"))
+                        time.sleep(2)
+                    intro()
+
                     try:
                         nums = random.choice(string.digits)
                         randomString = 'a' + 'b' + 'c' + 'd' + 'e' + 'f'
@@ -358,6 +359,13 @@ def osCheck():
             elif platform == "darwin":
                 print('os x')
             elif platform == "win32":
+                def intro():
+                    subprocess.call(["cls"], shell=True)
+                    print('[+] Toolbelt v1.0 by @L0WK3Y_IAANSEC [+]')
+                    custom_fig = pyfiglet.Figlet(font='isometric1')
+                    print(custom_fig.renderText("IAAN"))
+                    time.sleep(2)
+                intro()
                 print('windows')
 osCheck()
 
